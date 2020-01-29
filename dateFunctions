@@ -1,0 +1,38 @@
+// Função último dia último a partir de uma Data, pulando feriados
+
+ public function ultimoDiaCtrt ($DtFinal, $diasSelected, $feriados)
+    {
+        $diasSelected = explode(',', $diasSelected);
+
+        $last = count($diasSelected) - 1;
+
+        $i = 0;
+
+        do {
+
+            if (isset($diasSelected[$last - $i])){
+                $lastDay = $diasSelected[$last - $i];
+            } else {
+                $lastDay = $diasSelected[$last];
+            }
+
+            $txtLastDay = $this->getWeekDayTxt($lastDay);
+
+            $DtFinal = \DateTime::createFromFormat("Y-m-d", $DtFinal);
+            $DtFinal->setTimestamp(strtotime("last $txtLastDay", $DtFinal->getTimestamp()));
+
+            $verificaData = date("d/m/Y", $DtFinal->getTimestamp());
+
+            if (in_array($verificaData, $feriados)){
+                $DtFinal = date("Y-m-d", $DtFinal->getTimestamp());
+            }
+
+            $i++;
+
+        } while (in_array($verificaData, $feriados));
+
+        $dtFinal = date("Y-m-d", $DtFinal->getTimestamp());
+
+        return $dtFinal;
+
+    }
