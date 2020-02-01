@@ -1,19 +1,19 @@
 // Função último dia último a partir de uma Data, pulando feriados
 
- public function ultimoDiaCtrt ($DtFinal, $diasSelected, $feriados)
+ public function ultimoDiaCtrt ($DtFinal, $daysSelected, $feriados)
     {
-        $diasSelected = explode(',', $diasSelected);
+        $daysSelected = explode(',', $daysSelected);
 
-        $last = count($diasSelected) - 1;
+        $last = count($daysSelected) - 1;
 
         $i = 0;
 
         do {
 
-            if (isset($diasSelected[$last - $i])){
-                $lastDay = $diasSelected[$last - $i];
+            if (isset($daysSelected[$last - $i])){
+                $lastDay = $daysSelected[$last - $i];
             } else {
-                $lastDay = $diasSelected[$last];
+                $lastDay = $daysSelected[$last];
             }
 
             $txtLastDay = $this->getWeekDayTxt($lastDay);
